@@ -1,4 +1,4 @@
-1. Proiect integrator 1 – crearea unui contor pentru calcularea dobanzii unei sume introduse de 
+## 1. Proiect integrator 1 – crearea unui contor pentru calcularea dobanzii unei sume introduse de 
 utilizator. 
 Cod:
  #include <iostream> 
@@ -111,7 +111,9 @@ cout << " " << endl;
 cout << "Vă mulțumim!" << endl; 
 return 0; 
 } 
-2. Proiect integrator 2 – crearea unei aplicatii bancare care sa aiba o interfata cu utilizatorul care 
+
+
+## 2. Proiect integrator 2 – crearea unei aplicatii bancare care sa aiba o interfata cu utilizatorul care 
 sa introduca o anumita suma:  
 Alegeți o opțiune: 
 1. Vizualizați soldul curent 
