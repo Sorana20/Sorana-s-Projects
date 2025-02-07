@@ -1,0 +1,148 @@
+1. Proiect integrator 1 – crearea unui contor pentru calcularea dobanzii unei sume introduse de 
+utilizator. 
+Cod:
+ #include <iostream> 
+using namespace std; 
+// Declararea structurii pentru contul bancar 
+struct ACCOUNT { 
+double balance; 
+double interestRate; 
+double interest; 
+double creditLimit; 
+}; 
+// Funcția pentru inițializarea contului 
+void initializeAccount(ACCOUNT &account, double initialBalance, 
+double initialInterestRate, double creditLimit) { 
+account.balance = initialBalance; 
+account.interestRate = initialInterestRate; 
+account.creditLimit = creditLimit; 
+account.interest = 0; 
+} 
+// Funcție pentru efectuarea unei plăți recurente care include depășirea limitei 
+// de credit 
+bool makeTransaction(ACCOUNT &account, double paymentAmount) { 
+if (account.balance - paymentAmount < -account.creditLimit) { 
+cout << "Limita de credit depășită" << endl; 
+return false; 
+} 
+account.balance -= paymentAmount; 
+return true; 
+} 
+// Funcție pentru aplicarea dobânzii lunare 
+void applyInterest(ACCOUNT &account) { 
+account.interest = account.balance * account.interestRate / 100; 
+if (account.interest > 0) { 
+account.balance += account.interest; 
+} else { 
+cout << "Dobânda nu poate fi aplicată din lipsă de fonduri." << endl; 
+} 
+} 
+// Programul principal 
+int main() { 
+ACCOUNT SoranaVicu; 
+double initialBalance, interestRate, creditLimit; 
+double paymentAmount, priceTag; 
+int months; 
+// Inițializarea contului plus o condiție de reintroducere a datelor în caz că 
+// au fost introduse greșit 
+int retryTransaction = 1; 
+cout << "Acesta este o aplicație care vă ajută să vă calculați viitoarele " 
+"rate pentru posibile cumpărături." 
+<< endl; 
+cout << " " << endl; 
+cout << " " << endl; 
+cout << "Introduceți valoarea inițială din contul dumneavoastră: "; 
+cin >> initialBalance; 
+cout << "Introduceți rata dobânzii lunare (% în procente): "; 
+cin >> interestRate; 
+cout << "Introduceți limita de credit: "; 
+cin >> creditLimit; 
+cout << " " << endl; 
+while (retryTransaction == 1) { 
+initializeAccount(SoranaVicu, initialBalance, interestRate, creditLimit); 
+// Setare plăți recurente 
+cout << " " << endl; 
+cout << "Introduceți costul cumpărăturii: "; 
+cin >> priceTag; 
+cout << "Introduceți numărul de tranșe: "; 
+cin >> months; 
+paymentAmount = priceTag / months; 
+cout << "Valoarea ratelor lunare este de " << paymentAmount << " LEI" 
+<< endl; 
+cout << " " << endl; 
+// Simulare pentru fiecare lună 
+for (int i = 1; i <= months; ++i) { 
+cout << "Luna " << i << ":" << endl; 
+if (!makeTransaction(SoranaVicu, paymentAmount)) { 
+cout << "Plata de " << paymentAmount << " LEI nu poate fi efectuată. " 
+<< endl; 
+retryTransaction = 0; 
+break; 
+} 
+retryTransaction = 1; 
+cout << "Plata de " << paymentAmount << " LEI a fost efectuată cu succes!" 
+<< endl; 
+cout << "Sold nou: " << SoranaVicu.balance << " LEI" << endl; 
+applyInterest(SoranaVicu); 
+if (SoranaVicu.interest > 0) { 
+cout << "Dobânda a fost adăugată în contul dumneavoastră" << endl; 
+} 
+cout << "Soldul la sfârșitul lunii " << i 
+<< " este de: " << SoranaVicu.balance << " LEI" << endl; 
+cout << " " << endl; 
+} 
+// Afișare sold final 
+cout << " " << endl; 
+cout << " " << endl; 
+if (retryTransaction == 0) { 
+cout << "Soldul final al contului este: " << SoranaVicu.balance << " LEI" 
+<< endl; 
+cout << "Nu vă permiteți acest produs!" << endl; 
+} else { 
+cout << "Soldul final al contului este: " << SoranaVicu.balance << " LEI" 
+<< endl; 
+cout << "Vă permiteți acest produs. Spor la cumpărături!" << endl; 
+} 
+cout << "Doriți să calculați ratele pentru alt produs? (1-DA / 0-NU)" 
+<< endl; 
+cin >> retryTransaction; 
+} 
+cout << " " << endl; 
+cout << "Vă mulțumim!" << endl; 
+return 0; 
+} 
+2. Proiect integrator 2 – crearea unei aplicatii bancare care sa aiba o interfata cu utilizatorul care 
+sa introduca o anumita suma:  
+Alegeți o opțiune: 
+1. Vizualizați soldul curent 
+2. Vizualizați suma totală a plăților efectuate 
+3. Efectuați o plată 
+4. Ieșiți 
+Cod:
+ public class BankAccount { 
+private double balance; 
+private double totalPayments; 
+// Constructor pentru inițializarea soldului inițial 
+public BankAccount(double initialBalance) { 
+this.balance = initialBalance; 
+this.totalPayments = 0; 
+} 
+// Metoda pentru efectuarea plății 
+public void makePayment(double amount) { 
+if (this.balance >= amount) { 
+this.balance -= amount; 
+this.totalPayments += amount; 
+System.out.println("Plata de " + amount + " este efectuată cu succes."); 
+} else { 
+System.out.println("Fonduri insuficiente pentru această plată."); 
+} 
+} 
+// Metoda pentru returnarea soldului curent 
+public double getBalance() { 
+return this.balance; 
+} 
+// Metoda pentru returnarea sumei totale a plăților efectuate 
+public double getTotalPayments() { 
+return this.totalPayments; 
+} 
+} 
